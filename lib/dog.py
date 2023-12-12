@@ -23,3 +23,21 @@ class Dog:
         """
      CURSOR.execute(sql)
      CONN.commit()
+
+    @classmethod
+    def drop_table(cls):
+     sql = """
+              DROP TABLE IF EXISTS DOGS
+       """
+     CURSOR.execute(sql)
+     CONN.commit()
+
+    def save(self):
+        sql = """
+                INSERT INTO dogs (name, breed)
+                VALUES(?, ?)
+
+          """
+        CURSOR.execute(sql,(self.name, self.breed))
+        CONN.commit()
+        self.id = CURSOR.lastrowid
